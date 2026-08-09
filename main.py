@@ -7,18 +7,19 @@ from db.models import Actor, Genre
 
 def main() -> QuerySet:
     for value in ["Western", "Action", "Dramma"]:
-        Genre.objects.get(name=value)
+        Genre.objects.create(name=value)
 
-    for first_n in [
-        "George",
-        "Kianu",
-        "Scarlett",
-        "Will",
-        "Jaden",
-        "Scarlett"
-    ]:
-        for last_n in ["Klooney", "Reaves", "Keegan", "Smith", "Johansson"]:
-            Actor.objects.create(first_name=first_n, last_name=last_n)
+    actors = [
+        ("George", "Klooney"),
+        ("Kianu", "Reaves"),
+        ("Scarlett", "Keegan"),
+        ("Will", "Smith"),
+        ("Jaden", "Smith"),
+        ("Scarlett", "Johansson"),
+    ]
+
+    for first_n, last_n in actors:
+        Actor.objects.create(first_name=first_n, last_name=last_n)
 
     Genre.objects.filter(name="Dramma").update(name="Drama")
     Actor.objects.filter(last_name="Klooney").update(last_name="Clooney")
